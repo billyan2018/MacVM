@@ -79,6 +79,15 @@ final class VMDocument: ReferenceFileDocument {
         vmInstance = VMInstance(document: self, documentURL: documentURL)
     }
     
+    func toggelStartStop(_ documentURL: URL) {
+        if isRunning {
+            vmInstance?.stop()
+        } else {
+            createVMInstance(with: documentURL)
+            vmInstance?.start()
+        }
+    }
+    
     enum FileWrapperIdentifier: String {
         case metadata
     }

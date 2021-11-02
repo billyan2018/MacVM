@@ -9,6 +9,8 @@ import SwiftUI
 
 struct VMView: View {
     
+    //@ObservedObject var appState : AppState
+    
     @ObservedObject var document: VMDocument
     var fileURL: URL?
     
@@ -34,26 +36,6 @@ struct VMView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .toolbar {
-            ToolbarItem {
-                Button(action: {
-                    guard let fileURL = fileURL else {
-                        return
-                    }
-                    
-                    if document.isRunning {
-                        document.vmInstance?.stop()
-                    } else {
-                        document.createVMInstance(with: fileURL)
-                        document.vmInstance?.start()
-                    }
-                }) {
-                    Image(systemName: document.isRunning ? "stop.circle" : "play.circle")
-                        .font(.system(size: 24, weight: .regular, design: .rounded))
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                .disabled(!document.content.installed)
-            }
-        }
+
     }
 }
